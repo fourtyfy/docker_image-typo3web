@@ -42,4 +42,5 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN a2enmod rewrite
 
 # Expose port
-EXPOSE 80 443
+EXPOSE 80
+EXPOSE 443
