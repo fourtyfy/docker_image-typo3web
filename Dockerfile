@@ -6,6 +6,7 @@ WORKDIR /var/www/html
 # Install dependencies
 RUN apt-get update
 RUN apt-get install -y default-mysql-client
+RUN apt-get install -y graphicsmagick
 RUN apt-get install -y libfreetype*
 RUN apt-get install -y libicu-dev
 RUN apt-get install -y libjpeg62-turbo-dev
