@@ -27,11 +27,11 @@ RUN apt-get clean
 RUN locale-gen de_DE.UTF-8
 RUN locale-gen it_IT.UTF-8
 RUN locale-gen en_GB.UTF-8
-RUN update-locale LANG=de_DE.UTF-8
+RUN update-locale LANG=en_GB.UTF-8
 
-ENV LANG de_DE.UTF-8
-ENV LC_ALL de_DE.UTF-8
-ENV LANGUAGE de_DE.UTF-8
+ENV LANG en_GB.UTF-8
+ENV LC_ALL en_GB.UTF-8
+ENV LANGUAGE en_GB.UTF-8
 
 # Clean up
 RUN rm -rf /var/lib/apt/lists/*
