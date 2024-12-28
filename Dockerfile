@@ -22,7 +22,6 @@ RUN apt-get install -y locales
 RUN locale-gen de_DE.UTF-8
 RUN locale-gen it_IT.UTF-8
 RUN locale-gen en_GB.UTF-8
-RUN update-locale LANG=de_DE.UTF-8
 
 # Clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
