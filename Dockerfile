@@ -21,7 +21,7 @@ RUN apt-get install -y zlib1g-dev
 RUN apt-get install -y locales
 RUN apt-get install -y locales-all
 
-# Clean up
+# Clean up apt cache
 RUN apt-get clean
 
 # Set locales
@@ -34,14 +34,14 @@ ENV LANG de_DE.UTF-8
 ENV LC_ALL de_DE.UTF-8
 ENV LANGUAGE de_DE.UTF-8
 
-# Clean up
+# Remove leftover apt cache
 RUN rm -rf /var/lib/apt/lists/*
 
 # Install GD library
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 RUN docker-php-ext-install gd
 
-# Install extensions one by one to manage memory
+# Install PHP extensions one by one
 RUN docker-php-ext-install fileinfo
 RUN docker-php-ext-install intl
 RUN docker-php-ext-install mbstring
@@ -50,6 +50,7 @@ RUN docker-php-ext-install opcache
 RUN docker-php-ext-install pdo
 RUN docker-php-ext-install xml
 RUN docker-php-ext-install zip
+RUN docker-php-ext-install exif
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -57,6 +58,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Enable Apache rewrite module
 RUN a2enmod rewrite
 
-# Expose port
+# Expose ports
 EXPOSE 80
 EXPOSE 443
