@@ -1,4 +1,4 @@
-FROM php:8.3-apache
+FROM php:8.4-apache
 
 # Set the working directory
 WORKDIR /var/www/html
@@ -58,6 +58,17 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Enable Apache rewrite module
 RUN a2enmod rewrite
 
-# Expose ports
+# Install and configure SSH server
+RUN apt-get update && apt-get install -y openssh-server
+RUN mkdir /var/run/sshd
+RUN echo 'www-data:www-data' | chpasswd
+RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+RUN sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
+
+# Expose ports for SSH and Apache
 EXPOSE 80
 EXPOSE 443
+EXPOSE 22
+
+# Start SSH service and Apache
+CMD service ssh start && apache2-foreground
