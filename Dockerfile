@@ -52,9 +52,6 @@ RUN docker-php-ext-install xml
 RUN docker-php-ext-install zip
 RUN docker-php-ext-install exif
 
-# Install Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
 # Enable Apache rewrite module
 RUN a2enmod rewrite
 
