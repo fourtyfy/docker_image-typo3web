@@ -58,17 +58,9 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Enable Apache rewrite module
 RUN a2enmod rewrite
 
-# Install and configure SSH server
-RUN apt-get update && apt-get install -y openssh-server
-RUN mkdir /var/run/sshd
-RUN echo 'root:root' | chpasswd
-RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
-RUN sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
-
-# Expose ports for SSH and Apache
+# Expose ports for Apache
 EXPOSE 80
 EXPOSE 443
-EXPOSE 22
 
-# Start SSH service and Apache
-CMD service ssh start && apache2-foreground
+# Start Apache
+CMD ["apache2-foreground"]
