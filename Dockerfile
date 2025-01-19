@@ -1,4 +1,4 @@
-FROM php:8.4-apache
+FROM arm32v7/php:8.4-apache
 
 # Set the working directory
 WORKDIR /var/www/html
