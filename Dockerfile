@@ -1,6 +1,10 @@
 FROM php:8.4-apache
 
-RUN usermod -aG www-data ${PUID}
+ARG HOST_UID=1000
+ARG HOST_GID=1000
+
+RUN usermod -u ${HOST_UID} www-data
+RUN groupmod -g ${HOST_GID} www-data
 
 # Install dependencies
 RUN apt-get update
