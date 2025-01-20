@@ -1,6 +1,5 @@
 FROM php:8.4-apache
 
-RUN groupadd www-data
 RUN usermod -aG www-data $USER
 
 # Install dependencies
