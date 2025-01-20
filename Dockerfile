@@ -54,9 +54,6 @@ RUN docker-php-ext-install xml
 RUN docker-php-ext-install zip
 RUN docker-php-ext-install exif
 
-RUN chown -R www-data:www-data /var/www/html
-USER www-data
-
 # Enable Apache rewrite module
 RUN a2enmod rewrite
 
@@ -66,6 +63,9 @@ EXPOSE 443
 
 # Set the working directory
 WORKDIR /var/www/html
+
+RUN chown -R www-data:www-data /var/www/html
+USER www-data
 
 # Start Apache
 CMD ["apache2-foreground"]
