@@ -1,7 +1,7 @@
 FROM php:8.4-apache
 
-# Set the working directory
-WORKDIR /var/www/html
+RUN groupadd www-data
+RUN usermod -aG www-data $USER
 
 # Install dependencies
 RUN apt-get update
@@ -58,6 +58,9 @@ RUN a2enmod rewrite
 # Expose ports for Apache
 EXPOSE 80
 EXPOSE 443
+
+# Set the working directory
+WORKDIR /var/www/html
 
 # Start Apache
 CMD ["apache2-foreground"]
