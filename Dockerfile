@@ -3,8 +3,7 @@ FROM php:8.4-apache
 ARG HOST_UID=1000
 ARG HOST_GID=1000
 
-RUN usermod -u ${HOST_UID} www-data
-RUN groupmod -g ${HOST_GID} www-data
+RUN usermod -u 1000 www-data && groupmod -g 1000 www-data
 
 # Install dependencies
 RUN apt-get update
@@ -54,6 +53,9 @@ RUN docker-php-ext-install pdo
 RUN docker-php-ext-install xml
 RUN docker-php-ext-install zip
 RUN docker-php-ext-install exif
+
+RUN chown -R www-data:www-data /var/www/html
+USER www-data
 
 # Enable Apache rewrite module
 RUN a2enmod rewrite
