@@ -1,6 +1,6 @@
 FROM php:8.4-apache
 
-RUN usermod -aG www-data $USER
+RUN usermod -aG www-data ${PUID}
 
 # Install dependencies
 RUN apt-get update
