@@ -3,8 +3,6 @@ FROM php:8.4-apache
 ARG HOST_UID=1000
 ARG HOST_GID=1000
 
-RUN usermod -u 1000 www-data && groupmod -g 1000 www-data
-
 # Install dependencies
 RUN apt-get update
 RUN apt-get install -y default-mysql-client
@@ -64,8 +62,7 @@ EXPOSE 443
 # Set the working directory
 WORKDIR /var/www/html
 
-RUN chown -R www-data:www-data /var/www/html
-USER www-data
+RUN chown -R 1000:1000 /var/www/html
 
 # Start Apache
 CMD ["apache2-foreground"]
