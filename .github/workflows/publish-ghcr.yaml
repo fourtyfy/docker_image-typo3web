@@ -22,6 +22,6 @@ jobs:
         run: |
           docker buildx create --use
           docker buildx build . \
-            --platform linux/amd64,linux/arm64 \
+            --platform linux/amd64 \
             --tag ghcr.io/fourtyfy/docker_image-typo3web:latest \
             --push
