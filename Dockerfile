@@ -20,6 +20,7 @@ RUN apt-get install -y unzip
 RUN apt-get install -y zlib1g-dev
 RUN apt-get install -y locales
 RUN apt-get install -y locales-all
+RUN apt-get install -y curl
 
 # Clean up apt cache
 RUN apt-get clean
@@ -51,6 +52,8 @@ RUN docker-php-ext-install pdo
 RUN docker-php-ext-install xml
 RUN docker-php-ext-install zip
 RUN docker-php-ext-install exif
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Enable Apache rewrite module
 RUN a2enmod rewrite
